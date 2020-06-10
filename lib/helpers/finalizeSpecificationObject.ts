@@ -35,9 +35,6 @@ function cleanUselessProperties(inputSpec: any) {
 export function finalizeSpecificationObject(swaggerObject : any) {
   let specification = swaggerObject;
 
-
-  console.log("parser", parser);
-
   parser.parse(swaggerObject, (err : any, api : any) => {
     if (!err) {
       specification = api;

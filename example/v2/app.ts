@@ -1,4 +1,4 @@
-import { Application, Router } from "https://deno.land/x/oak/mod.ts";
+import { Application } from "https://deno.land/x/oak/mod.ts";
 import { router } from "./routes.ts";
 import { swaggerDoc } from "../../mod.ts";
 
@@ -25,10 +25,17 @@ const options = {
 // Initialize swagger-jsdoc -> returns validated swagger spec in json format
 const swaggerSpec = swaggerDoc(options);
 
-console.log(swaggerSpec);
-
 
 const app = new Application();
+app.use(async (context, next) => {
+  if(context.request.url.pathname === '/swagger.json'){
+    context.response.headers.set('Content-Type', 'application/json');
+    context.response.status = 200;
+    context.response.body = swaggerSpec
+  }else{
+    await next();
+  } 
+});
 app.use(router.routes());
 app.use(router.allowedMethods());
 
