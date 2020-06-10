@@ -16,7 +16,7 @@ To make sure your end specification is valid, do read the most up-to date offici
 using [`JSDoc`](https://jsdoc.app/) comments in your code. Just add `@swagger` on top of your DocBlock and declare the meaning of your code in YAML complying to the OpenAPI specification.
 
 ```ts
-import { swaggerDoc } from "https://deno.land/x/deno-swagger-doc/mod.ts";
+import { swaggerDoc } from "https://deno.land/x/deno_swagger_doc/mod.ts";
 
 const swaggerDefinition = {
   info: {
