@@ -1,0 +1,1 @@
+deno test --unstable --allow-read  test/test.ts
