@@ -16,7 +16,7 @@ export function parseApiFileContent(fileContent: any, ext: any) {
   const jsDocComments = [];
 
   if (ext === '.yaml' || ext === '.yml') {
-    yaml.push(jsYaml.safeLoad(fileContent));
+    yaml.push(jsYaml.load(fileContent));
   } else {
     const regexResults = fileContent.match(jsDocRegex);
     if (regexResults) {

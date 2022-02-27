@@ -16,7 +16,7 @@ export function filterJsDocComments(jsDocComments : any) {
     for (let j = 0; j < jsDocComment.tags.length; j += 1) {
       const tag = jsDocComment.tags[j];
       if (tag.title === 'swagger') {
-        swaggerJsDocComments.push(jsYaml.safeLoad(tag.description));
+        swaggerJsDocComments.push(jsYaml.load(tag.description));
       }
     }
   }
