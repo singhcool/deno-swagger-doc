@@ -56,7 +56,7 @@ Run the App with --unstable
 
 `denon run --allow-net --allow-read  --unstable ./example/v2/app.ts`
 
-If you facing any issue due to TypeScript type checking
+If you facing any issue due to TypeScript type checking. Please use the `--use-check` option 
 
 `denon run --no-check --allow-net --allow-read  --unstable ./example/v2/app.ts`
 
