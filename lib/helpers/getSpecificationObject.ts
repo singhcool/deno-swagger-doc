@@ -4,7 +4,7 @@ import { finalizeSpecificationObject } from './finalizeSpecificationObject.ts';
 import { updateSpecificationObject } from './updateSpecificationObject.ts';
 
 
-export function getSpecificationObject(options : any) {
+export function getSpecificationObject(options: any) {
   // Get input definition and prepare the specification's skeleton
   const definition = options.swaggerDefinition || options.definition;
   const specification = createSpecification(definition);
@@ -13,8 +13,10 @@ export function getSpecificationObject(options : any) {
   const apiPaths = options.apis;
 
   for (let i = 0; i < apiPaths.length; i += 1) {
-    const parsedFile = parseApiFile(apiPaths[i]);
-    updateSpecificationObject(parsedFile, specification);
+    const parsedFiles = parseApiFile(apiPaths[i]);
+    parsedFiles.forEach(parsedFile => {
+      updateSpecificationObject(parsedFile, specification);
+    });
   }
 
   return finalizeSpecificationObject(specification);
