@@ -14,7 +14,7 @@ const swaggerDefinition = {
   
   const options = {
     swaggerDefinition,
-    apis: ['./example/v2/routes.ts', './example/v2/parameters.yaml'],
+    apis: ['./example/v2/routes.ts', './example/v2/**/*.yaml'],
   };
 
   Deno.test('swaggerDoc()', async () => {

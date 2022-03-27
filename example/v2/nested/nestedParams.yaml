@@ -1,0 +1,7 @@
+parameters:
+  nestedLvl1:
+    name: nestedLvl1
+    description: Parameters nested in folder 1 time
+    in: formData
+    required: true
+    type: string
