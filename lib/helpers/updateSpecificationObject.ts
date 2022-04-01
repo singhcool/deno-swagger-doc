@@ -9,7 +9,6 @@ import  { filterJsDocComments }  from './filterJsDocComments.ts';
  * @param {object} specification - Specification accumulator.
  */
 export async function updateSpecificationObject(parsedFile :any, specification: any) {
-  console.log("parsedFile", parsedFile);
   const {yaml, jsdoc} = await parsedFile;
   addDataToSwaggerObject(specification, yaml);
 

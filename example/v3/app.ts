@@ -9,9 +9,7 @@ const swaggerDefinition = {
     version: '1.0.0', // Version (required)
     description: 'A sample API', // Description (optional)
   },
-  host: `localhost:8000`, // Host (optional)
-  basePath: '/', // Base path (optional)
-  swagger: '2.0', // Swagger version (optional)
+  openapi: '3.0.0', // openapi version (required)
 };
 
 // Options for the swagger docs
@@ -21,8 +19,9 @@ const options = {
   // Path to the API docs
   // Note that this path is relative to the current directory from which the Node.js is ran, not the application itself.
   apis: [
-    './example/v2/routes.ts',
-    './example/v2/**/*.yaml'
+    './example/v3/routes.ts',
+    './example/v3/**/*.yaml',
+    './example/v3/enum.ts'
   ],
 };
 

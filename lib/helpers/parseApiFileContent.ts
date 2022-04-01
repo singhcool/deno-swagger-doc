@@ -11,7 +11,7 @@ import doctrine from 'https://dev.jspm.io/doctrine';
  * @returns {{jsdoc: array, yaml: array}} JSDoc comments and Yaml files
  * @requires doctrine
  */
-export async function parseApiFileContent(fileContent: any, ext: any) {
+export function parseApiFileContent(fileContent: any, ext: any) {
   const jsDocRegex = /\/\*\*([\s\S]*?)\*\//gm;
   const yaml = [];
   const jsDocComments = [];
@@ -23,11 +23,9 @@ export async function parseApiFileContent(fileContent: any, ext: any) {
     if (regexResults) {
       for (let i = 0; i < regexResults.length; i += 1) {
         if (regexResults[i].indexOf('@swagger-enum') !== -1) {
-          console.log("myResult", regexResults[i]);
           const endOfJsDocComment = fileContent.indexOf(regexResults[i]) + regexResults[i].length;
           fileContent = fileContent.substring(endOfJsDocComment);
           const [all, enumName, enumDef] = fileContent.match(/enum\s([^\s]*)\s{([^}]*)}/m);
-          console.log("enumFound", enumName);
           if (enumName && enumDef) {
             const enumItems = enumDef.split(/[\r\n]+/).filter((i: string) => i.trim() !== '');
             if (enumItems.length) {
@@ -37,8 +35,10 @@ export async function parseApiFileContent(fileContent: any, ext: any) {
                 if (item.indexOf('=') === -1) {
                   itemsString += '*         - ' + item.trim().replace(/,$/, '') + '\n';
                 } else {
-                  type = 'string';
                   const itemParts = item.split('=');
+                  if (Number.isNaN(Number(itemParts[1].trim().replace(/,$/, '')))) {
+                    type = 'string';
+                  }
                   itemsString += ' *         - ' + itemParts[1].trim().replace(/,$/, '') + '\n';
                 }
               });
@@ -50,17 +50,14 @@ export async function parseApiFileContent(fileContent: any, ext: any) {
  *       type: ${type}
  *       enum:
 ${itemsString} */`;
-              console.log("final swagger", regexResults[i]);
             }
           }
         }
-        const jsDocComment = await doctrine.parse(regexResults[i], { unwrap: true });
+        const jsDocComment = doctrine.parse(regexResults[i], { unwrap: true });
         jsDocComments.push(jsDocComment);
       }
     }
   }
-
-  console.log("parseContent", yaml, jsDocComments);
 
   return {
     yaml,

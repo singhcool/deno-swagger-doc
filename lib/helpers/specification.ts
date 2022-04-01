@@ -151,7 +151,6 @@ function organizeSwaggerProperties(swaggerObject : any, pathObject : any, proper
  *                          comments
  */
 export function addDataToSwaggerObject(swaggerObject : any, data : any) {
-  console.log("addData", swaggerObject, data);
   if (!swaggerObject || !data) {
     throw new Error('swaggerObject and data are required!');
   }
