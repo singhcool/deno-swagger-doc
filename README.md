@@ -42,7 +42,7 @@ const options = {
 };
 
 // Initialize swagger-jsdoc -> returns validated swagger spec in json format
-const swaggerSpec = swaggerDoc(options);
+const swaggerSpec = await swaggerDoc(options);
 
 app.use(async (context, next) => {
   if(context.request.url.pathname === '/swagger.json'){
