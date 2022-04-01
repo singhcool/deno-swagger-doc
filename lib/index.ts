@@ -14,13 +14,13 @@ import  { getSpecificationObject }  from './helpers/getSpecificationObject.ts';
  * @returns {object} Output specification
  * @requires swagger-parser
  */
-export function swaggerDoc (options : any) {
+export async function swaggerDoc (options : any) {
   if ((!options.swaggerDefinition || !options.definition) && !options.apis) {
     throw new Error('Provided options are incorrect.');
   }
 
   try {
-    const specificationObject = getSpecificationObject(options);
+    const specificationObject = await getSpecificationObject(options);
 
     return specificationObject;
   } catch (err) {

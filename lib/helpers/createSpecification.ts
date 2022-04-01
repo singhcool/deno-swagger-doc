@@ -21,12 +21,10 @@ export function createSpecification(definition: any) {
   const v3 = [...v2, 'components'];
 
   if (specification.openapi) {
-    specification.openapi = specification.openapi;
     v3.forEach((property) => {
       specification[property] = specification[property] || {};
     });
   } else if (specification.swagger) {
-    specification.swagger = specification.swagger;
     v2.forEach((property) => {
       specification[property] = specification[property] || {};
     });
