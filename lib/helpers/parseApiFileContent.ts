@@ -1,5 +1,6 @@
 import jsYaml from 'https://dev.jspm.io/js-yaml';
 import doctrine from 'https://dev.jspm.io/doctrine';
+import { swaggerEnumParser } from './swaggerEnumParser.ts';
 
 /**
  * Parse the provided API file content.
@@ -21,6 +22,9 @@ export function parseApiFileContent(fileContent: any, ext: any) {
     const regexResults = fileContent.match(jsDocRegex);
     if (regexResults) {
       for (let i = 0; i < regexResults.length; i += 1) {
+        const { content, jsDoc } = swaggerEnumParser(fileContent, regexResults[i]);
+        fileContent = content;
+        regexResults[i] = jsDoc;
         const jsDocComment = doctrine.parse(regexResults[i], { unwrap: true });
         jsDocComments.push(jsDocComment);
       }
